@@ -1,6 +1,6 @@
 # 🍽️ RecePeek
 
-**RecetasPeek** 
+**RecePeek** 
 Es una plataforma web de recetas colaborativas donde los usuarios pueden publicar, comentar, 
 votar y guardar sus recetas favoritas. El sitio está diseñado para ser intuitivo, 
 limpio y rápido, adaptándose a cualquier dispositivo, desde escritorio hasta móvil.
