@@ -1,0 +1,91 @@
+# Se inicia la red de contendores dockers
+networks:
+  laravel_network:
+services:
+  # Lanza el servidor nginx, lo expone en el puerto 80 del contenedor al 8080 en el host.
+  # Se monta un archivo de configuracion como solo lectura.
+  # Necesita que el PHP y el MYSQL esten activos. 
+  server:
+    build:
+      context: .
+      dockerfile: dockerfiles/nginx.dockerfile
+    ports:
+      - 8080:80
+    volumes:
+      - ./src:/var/www/html
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+    depends_on:
+      - php
+      - mysql
+    container_name: laravel_server
+    networks:
+      - laravel_network
+  # Este contenedor ejecuta el PHP-FPM(el motor PHP), se comparte el codigo fuente con Nginx
+  # El delegated esta destinado a mejorar el rendimiento en entorno Mac/Linux pero como estamos en Windows no influencia en nada 
+  php:
+    build:
+      context: .
+      dockerfile: dockerfiles/php.dockerfile
+    volumes:
+      - ./src:/var/www/html:delegated
+    container_name: laravel_php
+    networks:
+      - laravel_network
+  # Carga las variables de entorno en el .env, se expone en el pierto 3306, usa el volumen mysql_data para guardar la base de datos
+  # Se reinicia AUTOMATICAMENTE a menos que se detenga manualmente, esto para evitar problemas si el contenedor se cae
+  mysql:
+    image: mysql:8.0.1
+    restart: unless-stopped
+    tty: true
+    container_name: laravel_mysql
+    env_file:
+      - mysql/.env
+    ports:
+      - 3306:3306
+    networks:
+      - laravel_network
+    volumes:
+      - ./mysql_data:/var/lib/mysql
+
+  # Interfaz grafica para la gestión de MySQL y se conecta directamente al contenedor mysql
+  # Crea la ruta localhost:8090 para la interfaz
+  # Credenciales de root para evitar problemas de permisos para la gestion de datos
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    restart: always
+    container_name: laravel_phpmyadmin
+    depends_on:
+      - mysql
+    ports:
+      - 8090:80
+    environment:
+      - PMA_HOST=mysql
+      - PMA_USER=root
+      - PMA_PASSWORD=root
+    networks:
+      - laravel_network
+  
+  # Ejecuta el composer para instalar las dependencias de PHP, y esta conectado al volumen directamente, si el usuario instala el paquete se instalarán allí.
+  # Necesita que el php este corriendo 
+  composer:
+    build:
+      context: .
+      dockerfile: dockerfiles/composer.dockerfile
+    volumes:
+      - ./src:/var/www/html
+    depends_on:
+      - php
+    networks:
+      - laravel_network
+
+  # Permite ejecutar los permisos de Artisan de Laravel(migraciones, seeders, controladores,etc)
+  # Usa el mismo contenedor que PHP para ejecutar el comando de php artisan, se ejecuta automaticamente con el entrypoint
+  artisan:
+    build:
+      context: .
+      dockerfile: dockerfiles/php.dockerfile
+    volumes:
+      - ./src:/var/www/html
+    entrypoint: ["php", "/var/www/html/artisan"]
+    networks:
+      - laravel_network

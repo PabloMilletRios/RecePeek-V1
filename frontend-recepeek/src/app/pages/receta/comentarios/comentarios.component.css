@@ -1,0 +1,18 @@
+/* Estilo personalizado para comentarios */
+.comentario-box {
+  background-color: #fff;
+  border: 1px solid #dee2e6;
+  border-radius: 0.25rem;
+}
+
+/* Adaptación para modo oscuro */
+.dark-theme .comentario-box {
+  background-color: #1e1e1e !important;
+  color: #f1f1f1 !important;
+  border-color: #444 !important;
+}
+
+/* También adaptamos el contenedor de la lista si lo deseas */
+.dark-theme ul.list-group {
+  background-color: transparent;
+}

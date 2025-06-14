@@ -1,0 +1,39 @@
+<div class="container mt-5" style="max-width: 700px;">
+  <h2 class="mb-4 text-center">📤 Publicar nueva receta</h2>
+
+  <form (ngSubmit)="publicarReceta()" #form="ngForm">
+    <div class="mb-3">
+      <label for="title" class="form-label">Título</label>
+      <input type="text" id="title" class="form-control" [(ngModel)]="receta.title" name="title" required>
+    </div>
+
+    <div class="mb-3">
+      <label for="description" class="form-label">Descripción</label>
+      <textarea id="description" class="form-control" rows="3" [(ngModel)]="receta.description" name="description" required></textarea>
+    </div>
+
+    <div class="mb-3">
+      <label for="steps" class="form-label">Pasos (separados por salto de línea)</label>
+      <textarea id="steps" class="form-control" rows="5" [(ngModel)]="receta.steps" name="steps" required></textarea>
+    </div>
+
+    <div class="mb-3">
+      <label for="category" class="form-label">Categoría</label>
+      <select id="category" class="form-select" [(ngModel)]="receta.category" name="category" required>
+        <option value="" disabled selected>Seleccione una categoría</option>
+        <option>Primero</option>
+        <option>Segundo</option>
+        <option>Postre</option>
+        <option>Pasteleria</option>
+        <option>Otros</option>
+      </select>
+    </div>
+
+    <button type="submit" class="btn btn-green w-100" [disabled]="form.invalid">Publicar receta</button>
+
+    <div *ngIf="mensaje" class="alert alert-info mt-3 text-center">
+      {{ mensaje }}
+    </div>
+  </form>
+</div>
+

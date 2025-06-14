@@ -1,0 +1,155 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  height: auto;
+  min-height: 100%;
+}
+
+/* Variables base */
+:root {
+  --main-green: #4caf50;
+}
+
+/* Estilos generales */
+.navbar-brand {
+  color: var(--main-green) !important;
+}
+
+.btn-green {
+  background-color: var(--main-green);
+  color: white;
+}
+
+.btn-green:hover {
+  background-color: #43a047;
+}
+
+/* SIDE BARS estilo claro */
+.left-sidebar,
+.right-sidebar {
+  position: sticky;
+  top: 80px;
+  background-color: #f2f2f2;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  height: fit-content;
+  z-index: 10;
+}
+
+
+/* Títulos de secciones */
+.sidebar-title {
+  font-weight: bold;
+  color: #4a4a4a;
+}
+
+/* Enlaces dentro de sidebars */
+.left-sidebar a,
+.right-sidebar a {
+  color: #333;
+}
+
+/* Modo oscuro general */
+.dark-theme {
+  background-color: #121212;
+  color: #f1f1f1;
+}
+
+.dark-theme .navbar,
+.dark-theme .card,
+.dark-theme .container,
+.dark-theme .form-control,
+.dark-theme .btn {
+  background-color: #1e1e1e !important;
+  color: #f1f1f1 !important;
+  border-color: #444 !important;
+}
+
+.dark-theme .left-sidebar,
+.dark-theme .right-sidebar {
+  position: sticky;
+  top: 80px;
+  background-color: #2c2c2c !important;
+  color: #ffffff !important;
+  border-radius: 0.5rem;
+  height: fit-content;
+  z-index: 10;
+}
+
+
+.dark-theme .sidebar-title {
+  color: #ffffff !important;
+}
+
+.dark-theme .left-sidebar a,
+.dark-theme .right-sidebar a {
+  color: #ffffff;
+}
+
+/* Botones modo oscuro */
+.dark-theme .btn-green {
+  background-color: var(--main-green) !important;
+  color: white !important;
+}
+
+.dark-theme .btn-green:hover {
+  background-color: #43a047 !important;
+}
+
+.dark-theme .navbar-brand {
+  color: #a5d6a7 !important;
+}
+
+.dark-theme a {
+  color: #81d4fa;
+}
+
+/* Títulos destacados en modo oscuro */
+.dark-theme .category-title,
+.dark-theme .resource-title,
+.dark-theme .recipe-title,
+.dark-theme .user-name {
+  color: var(--main-green) !important;
+}
+
+/* Caja blanca del formulario (modo claro) */
+.auth-card {
+  background-color: #ffffff;
+  color: #212529;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Caja en modo oscuro */
+.dark-theme .auth-card {
+  background-color: #1e1e1e !important;
+  color: #f1f1f1 !important;
+  border: 1px solid #444;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+/* Pie de página */
+.footer {
+  background-color: #f2f2f2;
+  text-align: center;
+  padding: 1rem;
+  font-size: 0.9rem;
+  margin-top: 2rem;
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+}
+
+.dark-theme .footer {
+  background-color: #1e1e1e;
+  color: #f1f1f1;
+}
+.navbar.sticky-top {
+  z-index: 1030;
+}
+
+/* estilos.css o navbar.component.css */
+.mobile-menu {
+  z-index: 1050;
+  min-width: 200px;
+}

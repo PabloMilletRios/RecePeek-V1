@@ -1,0 +1,119 @@
+<div class="container-fluid mt-4">
+  <div class="row position-relative">
+    <!-- Sidebar izquierdo -->
+    <div class="col-md-2 mb-4">
+      <div class="left-sidebar">
+        <!-- Paneless simples para navegación -->
+        <h6 class="sidebar-title">CATEGORÍAS</h6>
+        <ul class="list-unstyled">
+          <li>
+            <a href="#" (click)="filtrarPorCategoria('Ensaladas')" class="text-decoration-none d-block py-1">🥗
+              Ensaladas</a>
+          </li>
+          <li>
+            <a href="#" (click)="filtrarPorCategoria('Primero')" class="text-decoration-none d-block py-1">🍜
+              Primero</a>
+          </li>
+          <li>
+            <a href="#" (click)="filtrarPorCategoria('Segundo')" class="text-decoration-none d-block py-1">🍔
+              Segundo</a>
+          </li>
+          <li>
+            <a href="#" (click)="filtrarPorCategoria('Postres')" class="text-decoration-none d-block py-1">🍨
+              Postres</a>
+          </li>
+          <li>
+            <a href="#" (click)="filtrarPorCategoria('Pasteleria')" class="text-decoration-none d-block py-1">🥐
+              Pasteleria</a>
+          </li>
+        </ul>
+
+        <h6 class="sidebar-title mt-4">RECURSOS</h6>
+        <ul class="list-unstyled">
+          <li>
+            <a href="#" class="text-decoration-none d-block py-1">Acerca de</a>
+          </li>
+          <li>
+            <a href="#" class="text-decoration-none d-block py-1">Contacto</a>
+          </li>
+          <li>
+            <a href="#" class="text-decoration-none d-block py-1">Ayuda</a>
+          </li>
+        </ul>
+        <h6 class="sidebar-title mt-4">Favoritos</h6>
+        <ul class="list-unstyled">
+          <li>
+            <a href="#" (click)="mostrarFavoritos()" class="text-decoration-none d-block py-1">Favoritos ⭐</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Despliegue de Recetas Home -->
+    <div class="col-md-7">
+      <div class="main-content">
+        <!--Si la pagina esta vacia que se exponga-->
+        <div *ngIf="recetas.length === 0" class="text-muted">
+          No hay recetas aún.
+        </div>
+        <!--Despliegue de Recetas-->
+        <div *ngFor="let receta of recetas" class="card mb-4 shadow-sm">
+          <div class="card-body">
+            <h5 class="card-title">{{ receta.title }}</h5>
+            <p class="card-text d-flex align-items-center">
+              <strong> Por {{ receta.user?.name || "Usuario" }}</strong> ·
+              {{ receta.created_at | date : "dd/MM/yyyy HH:mm" }}
+            </p>
+            <p class="card-title">
+              <Strong>Categoria : {{ receta.category }}</Strong>
+            </p>
+            <p class="card-text">{{ receta.description }}</p>
+            <div class="d-flex justify-content-between">
+              <div>
+                <button class="btn btn-light btn-sm" (click)="darLike(receta.id)">
+                  👍
+                </button>
+                <strong> {{ receta.likes_count }} </strong>
+                <button class="btn btn-light btn-sm" (click)="darDislike(receta.id)">
+                  👎
+                </button>
+              </div>
+              <button class="btn btn-outline-success btn-sm" [routerLink]="['/receta', receta.id]">
+                Ver receta completa
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Footer -->
+        <footer>
+          <p class="text-muted text-center mt-5 small">
+            © 2025 RecePeek - Todos los derechos reservados
+          </p>
+        </footer>
+
+      </div>
+    </div>
+
+    <!-- Sidebar derecho Recetas Peek-->
+    <div class="col-md-3 d-none d-md-block">
+      <div class="right-sidebar">
+        <h6 class="sidebar-title text-muted">Recetas Populares</h6>
+        <ul class="list-unstyled">
+          <li>
+            <a href="#" class="d-block py-1 text-decoration-none">🍕 Pizza casera</a>
+          </li>
+          <li>
+            <a href="#" class="d-block py-1 text-decoration-none">🥞 Pancakes esponjosos</a>
+          </li>
+          <li>
+            <a href="#" class="d-block py-1 text-decoration-none">🍛 Curry vegano</a>
+          </li>
+          <li>
+            <a href="#" class="d-block py-1 text-decoration-none">🍳 Tortilla de patatas</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

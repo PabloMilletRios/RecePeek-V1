@@ -1,0 +1,13 @@
+footer {
+  background-color: #f8f9fa;
+  padding: 1rem;
+  color: #212529;
+  text-align: center;
+}
+
+/* Versión en modo oscuro */
+.dark-theme footer {
+  background-color: #1e1e1e !important;
+  color: #f1f1f1 !important;
+  border-top: 1px solid #333;
+}

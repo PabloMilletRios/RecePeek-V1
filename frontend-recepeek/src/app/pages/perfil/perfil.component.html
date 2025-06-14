@@ -1,0 +1,71 @@
+<div class="container mt-4">
+  <h2>Mi Perfil</h2>
+
+  <div class="mb-3">
+    <button
+      class="btn btn-outline-primary me-2"
+      (click)="cambiarSeccion('recetas')"
+    >
+      Recetas Propias
+    </button>
+    <button
+      class="btn btn-outline-secondary"
+      (click)="cambiarSeccion('ajustes')"
+    >
+      Ajustes de Cuenta
+    </button>
+  </div>
+
+  <div *ngIf="seccion === 'recetas'">
+    <h4>Mis Recetas</h4>
+    <div *ngFor="let receta of recetasPropias" class="mb-3 p-3 border rounded">
+      <h5>{{ receta.title }}</h5>
+      <p>{{ receta.description }}</p>
+      <button class="btn btn-danger btn-sm" (click)="eliminar(receta.id)">
+        Eliminar
+      </button>
+    </div>
+  </div>
+
+  <div *ngIf="seccion === 'ajustes'" class="mt-4">
+    <h4>Configuración de la Cuenta</h4>
+
+    <div class="mb-3">
+      <label>Nombre de usuario</label>
+      <input class="form-control" [(ngModel)]="perfil.name" />
+      <button class="btn btn-success mt-2" (click)="guardarNombre()">
+        Guardar nombre
+      </button>
+    </div>
+
+    <div class="mb-3">
+      <label>Contraseña actual</label>
+      <input
+        class="form-control"
+        [(ngModel)]="password.actual"
+        type="password"
+      />
+      <label>Nueva contraseña</label>
+      <input
+        class="form-control"
+        [(ngModel)]="password.nueva"
+        type="password"
+      />
+      <label>Confirmar nueva contraseña</label>
+      <input
+        class="form-control"
+        [(ngModel)]="password.confirmacion"
+        type="password"
+      />
+      <button class="btn btn-warning mt-2" (click)="cambiarPassword()">
+        Cambiar contraseña
+      </button>
+    </div>
+
+    <div class="mt-4">
+      <button class="btn btn-danger" (click)="eliminarCuenta()">
+        Eliminar Cuenta
+      </button>
+    </div>
+  </div>
+</div>

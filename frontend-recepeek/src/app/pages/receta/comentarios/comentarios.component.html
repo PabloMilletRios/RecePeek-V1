@@ -1,0 +1,22 @@
+<h5 class="mt-4">Comentarios</h5>
+
+<div class="mt-3">
+    <h6>Escribe un comentario</h6>
+    <textarea [(ngModel)]="nuevoComentario" rows="3" class="form-control mb-2"></textarea>
+    <button class="mb-2 btn btn-success btn-sm" (click)="enviarComentario()">Comentar</button>
+</div>
+
+<div *ngIf="comentarios.length === 0" class="text-muted">Aún no hay comentarios.</div>
+<div class="mt-3">
+    <ul class="list-group">
+        <h5> Comentarios de la Comunidad </h5>
+        <li *ngFor="let c of comentarios" class="mt-3 comentario-box list-group-item d-flex justify-content-between align-items-start">
+            <div>
+                <strong> {{ c.user?.name || 'Usuario' }}</strong> <br>
+                {{ c.contenido }}
+            </div>
+            <button *ngIf="c.user?.id === currentUserId" (click)="eliminarComentario(c.id)"
+                class="btn btn-sm btn-danger">🗑</button>
+        </li>
+    </ul>
+</div>
