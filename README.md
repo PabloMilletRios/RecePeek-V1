@@ -1,4 +1,4 @@
-# 🍽️ RecetasPeek
+# 🍽️ RecePeek
 
 **RecetasPeek** 
 Es una plataforma web de recetas colaborativas donde los usuarios pueden publicar, comentar, 
